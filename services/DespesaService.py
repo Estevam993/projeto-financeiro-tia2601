@@ -24,8 +24,8 @@ class DespesaService:
         for despesa in despesas:
             if despesa.tipo not in despesas_dict["valores"]:
                 despesas_dict["valores"][despesa.tipo] = despesa.valor
-
-            despesas_dict["valores"][despesa.tipo] += despesa.valor
+            else:
+                despesas_dict["valores"][despesa.tipo] += despesa.valor
 
             despesas_dict["total"] = despesa.valor + despesas_dict["total"]
 

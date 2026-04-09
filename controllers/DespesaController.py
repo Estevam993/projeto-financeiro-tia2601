@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, session
 from db import SessionLocal
+from services.AnalyticsService import AnalyticsService
 from services.DespesaService import DespesaService
 
 despesa_bp = Blueprint("despesas", __name__)
@@ -50,6 +51,27 @@ def listar_despesas():
         return jsonify({
             "status": "OK",
             "despesa": despesa
+        })
+    else:
+        return jsonify({
+            "status": "Error",
+            "Message": "Não autorizado"
+        }), 401
+
+@despesa_bp.route("mensal/", methods=["GET"])
+def listar_despesa_mensal():
+    user_id = session.get("id")
+    limite = request.args.get('limite', type=float)
+
+    if user_id:
+        with SessionLocal() as db_session:
+            service = AnalyticsService(db_session)
+            despesa, data = service.get_monthly_expend(user_id, limite)
+
+        return jsonify({
+            "status": "OK",
+            "despesa": despesa,
+            "dados": data
         })
     else:
         return jsonify({
