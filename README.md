@@ -1,14 +1,18 @@
 # Projeto Financeiro
 
-Esse projeto consiste em uma analise estatistica financeira dos seus gastos.
+Este projeto foi desenvolvido para ajudar usuários a organizarem suas finanças pessoais,
+permitindo o controle de despesas mensais, análise de gastos e previsão financeira.
+
+A ideia surgiu da dificuldade em visualizar padrões de gastos ao longo do tempo.
 ___
 
 ## Índice
 
 1. [Organização de pastas](#organização-de-pastas)
 2. [Tecnologias](#tecnologias)
-3. [Endpoints](#endpoints)
-3. [Como funciona?](#como-funciona)
+3. [Como Rodar o projeto](#como-rodar-o-projeto)
+4. [Endpoints](#endpoints)
+5. [Como funciona?](#como-funciona)
 
 ___
 
@@ -57,6 +61,54 @@ Tecnologias utilizadas:
 
 - postman
 
+___
+
+### Como Rodar o projeto
+
+#### 📋 Pré-requisitos
+
+Antes de começar, você vai precisar ter instalado na sua máquina:
+
+- Python 3.10+
+- pip (gerenciador de pacotes do Python)
+
+---
+
+#### 📦 Clonando o repositório
+
+---
+
+```bash
+git clone https://github.com/Estevam993/projeto-financeiro-tia2601.git
+cd projeto-financeiro-tia2601 
+```
+
+#### Instalando dependências:
+
+---
+
+``` bash
+pip install -r requirements.txt
+```
+
+#### Executando a aplicação:
+
+---
+
+```bash
+python app.py
+```
+ou
+```bash
+flask run
+```
+
+> [!WARNING]
+> Caso ocorra erro de dependências, tente atualizar o pip:
+
+```bash
+pip install --upgrade pip
+```
 ___
 
 ### Endpoints
