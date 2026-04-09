@@ -101,7 +101,7 @@ Retorno:
 }
 ```
 
-> [!info]
+> [!NOTE]
 > Os dados após o login são armazenados via Session pelo Flask
 
 **Criar Despesas** _POST_ <br>
