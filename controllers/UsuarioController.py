@@ -24,7 +24,7 @@ def criar_usuario():
                 return jsonify({
                     "status": "Error",
                     "Message": usuario
-                }), 500
+                }), 409
         except Exception as e:
             return jsonify({
                 "status": "Error",

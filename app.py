@@ -2,8 +2,11 @@ from flask import Flask
 from db import engine, Base
 from controllers.UsuarioController import usuario_bp
 from controllers.DespesaController import despesa_bp
+from flask_cors import CORS
 
 app = Flask(__name__)
+
+CORS(app)
 app.secret_key = "minha_chave_super_secreta"
 
 Base.metadata.create_all(bind=engine)
