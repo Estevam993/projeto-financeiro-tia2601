@@ -39,9 +39,8 @@ def criar_despesa():
         }), 401
 
 
-@despesa_bp.route("/", methods=["GET"])
-def listar_despesas():
-    user_id = session.get("id")
+@despesa_bp.route("/<int:user_id>", methods=["GET"])
+def listar_despesas(user_id):
 
     if user_id:
         with SessionLocal() as db_session:

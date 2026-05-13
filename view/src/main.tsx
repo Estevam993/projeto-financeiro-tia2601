@@ -1,20 +1,24 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client'
 import './index.css'
-import { BrowserRouter, Routes, Route } from "react-router";
+import {BrowserRouter, Route, Routes} from "react-router";
 import App from './App.tsx'
-import {Login} from "./pages";
+import {Login, Dashboard} from "./pages";
+import {Toaster} from "@/components/ui/sonner.tsx";
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-      <BrowserRouter>
-          <Routes>
-              <Route index element={<App />} />
-          </Routes>
-          <Routes>
-              <Route path={"/login"} element={<Login />} />
-          </Routes>
-      </BrowserRouter>
-
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<App/>}/>
+      </Routes>
+      <Routes>
+        <Route path={"/login"} element={<Login/>}/>
+      </Routes>
+      <Routes>
+        <Route path={"/dashboard"} element={<Dashboard/>}/>
+      </Routes>
+    </BrowserRouter>
+    <Toaster/>
   </StrictMode>,
 )
