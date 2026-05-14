@@ -41,13 +41,13 @@ export default function Dashboard() {
     <>
       <div className="text-white p-4 grid grid-cols-2 gap-4">
         <div className={"w-full flex flex-col items-center gap-4"}>
+          <div className={"font-semibold text-xl"}>
+            DESPESAS TOTAIS: R$ {Math.ceil(total * 20) / 20}
+          </div>
           <div className={"max-h-[430px] w-full overflow-auto"}>
             <DataTable data={expenses} columns={columnsDespesas}/>
           </div>
           <div>
-            <div className={"mb-4 font-semibold text-xl"}>
-              TOTAIS POR TIPO
-            </div>
             <TypeChart values={values}/>
           </div>
         </div>
