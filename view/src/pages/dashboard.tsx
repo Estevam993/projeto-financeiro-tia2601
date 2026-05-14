@@ -2,64 +2,14 @@
 import getExpenses from '@/hooks/expenses.ts'
 import {useEffect, useState} from "react";
 import DataTable from "@/components/DataTable.tsx";
-import type {ColumnDef} from "@tanstack/react-table";
 import Button from "@/components/Button";
-
-type Despesa = {
-  date: string,
-  descricao: string,
-  id: number,
-  tipo: string,
-  user_id: number,
-  valor: number,
-}
-
-const columnsDespesas: ColumnDef<Despesa>[] = [
-  {
-    accessorKey: "descricao",
-    header: () => (
-      <div className="text-white text-center font-bold">
-        Descrição
-      </div>
-    ),
-  },
-  {
-    accessorKey: "tipo",
-    header: () => (
-      <div className="text-white text-center font-bold">
-        Tipo
-      </div>
-    ),
-  },
-  {
-    accessorKey: "valor",
-    header: () => (
-      <div className="text-white text-center font-bold">
-        Valor
-      </div>
-    ),
-  },
-  {
-    accessorKey: "date",
-    header: () => (
-      <div className="text-white text-center font-bold">
-        Data
-      </div>
-    ),
-    cell: ({cell}) => {
-      const dataFormatada = cell.getValue('date').split('-').reverse().join('/')
-
-      return (
-        <div className="">
-          {dataFormatada}
-        </div>
-      )
-    }
-  }
-]
+import TypeChart from "@/components/TypesChart.tsx";
+import {columnsDespesas, type Despesa} from "@/helpers/configExpensesTable.tsx";
 
 export default function Dashboard() {
   const [expenses, setExpenses] = useState<Despesa[]>([])
+  const [values, setValues] = useState<Record<string, number>>({})
+  const [total, setTotal] = useState<number>(0)
 
   useEffect(() => {
     async function fetchExpenses() {
@@ -67,6 +17,8 @@ export default function Dashboard() {
         const response = await getExpenses()
 
         setExpenses(response.despesa.despesas)
+        setValues(response.despesa.valores)
+        setTotal(response.despesa.total)
       } catch (error) {
         console.log(error instanceof Error ? error.message : error)
       }
@@ -75,7 +27,7 @@ export default function Dashboard() {
     fetchExpenses()
   }, [])
 
-  if (!expenses.length) {
+  if (!expenses.length)
     return (
       <>
         <div className="text-white">
@@ -83,18 +35,28 @@ export default function Dashboard() {
         </div>
       </>
     )
-  }
+
 
   return (
     <>
-      <div className="text-white p-4 flex flex-row gap-4">
-        <div className={"w-[32rem]"}>
-          <DataTable data={expenses} columns={columnsDespesas}/>
+      <div className="text-white p-4 grid grid-cols-2 gap-4">
+        <div className={"w-full flex flex-col items-center gap-4"}>
+          <div className={"max-h-[430px] w-full overflow-auto"}>
+            <DataTable data={expenses} columns={columnsDespesas}/>
+          </div>
+          <div>
+            <div className={"mb-4 font-semibold text-xl"}>
+              TOTAIS POR TIPO
+            </div>
+            <TypeChart values={values}/>
+          </div>
         </div>
-        <div>
-          <Button text={"Criar nova despesa"}/>
+        <div className={"w-full flex flex-col gap-4"}>
+          <div className={"w-full flex items-center justify-center"}>
+            <Button text={"Anotar nova despesa"} onClick={() => {
+            }}/>
+          </div>
         </div>
-
       </div>
     </>
   )
