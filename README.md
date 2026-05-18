@@ -13,6 +13,7 @@ ___
 3. [Como Rodar o projeto](#como-rodar-o-projeto)
 4. [Endpoints](#endpoints)
 5. [Como funciona?](#como-funciona)
+6. [Front-End](#front-end)
 
 ___
 
@@ -33,6 +34,9 @@ Na pasta _**services**_ é onde estão os métodos responsaveis por ligar as req
 serão manipulados no banco de dados, como por exemplo, tratar os dados de um usuário, e salvar de forma correta no banco
 de dados.
 
+**View**<br>
+Na pasta _**view**_ é onde se encontra a aplicação React responsável pela comunicação entre o usuário e a aplicação flask, onde o usuario pode criar uma conta, fazer login, visualizar suas despesas e criar novas despesas.
+
 ___
 
 ### Tecnologias
@@ -42,6 +46,7 @@ Tecnologias utilizadas:
 **Linguagem**<br>
 
 - Python
+- TypeScript
 
 **Banco de dados**<br>
 
@@ -61,6 +66,14 @@ Tecnologias utilizadas:
 
 - postman
 
+
+**Front-End**<br>
+- React
+- TailwindCss
+- TanstackTable
+- Recharts
+- Shadcn
+
 ___
 
 ### Como Rodar o projeto
@@ -70,6 +83,7 @@ ___
 Antes de começar, você vai precisar ter instalado na sua máquina:
 
 - Python 3.10+
+- Node v22.12.0+
 - pip (gerenciador de pacotes do Python)
 
 ---
@@ -87,14 +101,22 @@ cd projeto-financeiro-tia2601
 
 ---
 
+**Back-End**
 ``` bash
 pip install -r requirements.txt
+```
+
+**Front-End**
+```bash
+cd .\view\
+npm i
 ```
 
 #### Executando a aplicação:
 
 ---
 
+**Back-End**
 ```bash
 python app.py
 ```
@@ -108,6 +130,11 @@ flask run
 
 ```bash
 pip install --upgrade pip
+```
+
+**Front-End**
+```bash
+npm run dev
 ```
 ___
 
@@ -157,7 +184,7 @@ Retorno:
 > Os dados após o login são armazenados via Session pelo Flask
 
 **Criar Despesas** _POST_ <br>
-URL: `{{url}}/despesas/` <br><br>
+URL: `{{url}}/despesas/1` <br><br>
 Body:
 
 ```json
@@ -178,7 +205,7 @@ Retorno:
 ```
 
 **Pegar Despesas** _GET_ <br>
-URL: `{{url}}/despesas/` <br><br>
+URL: `{{url}}/despesas/1` <br><br>
 Retorno:
 
 ```json
@@ -220,10 +247,11 @@ Retorno:
 ```
 
 **Media e Previsões de Despesas** _GET_ <br>
-URL: `{{url}}/despesas/mensal?limite=2000` <br>
+URL: `{{url}}/despesas/mensal?limite=2000&id=1` <br>
 Parametros:
 
-- *limite*: limite de gastos que o usuário estabeleceu <br>
+- *limite*: limite de gastos que o usuário estabeleceu
+- _id_: id do usuário <br>
 
 Retorno:
 
@@ -326,3 +354,40 @@ Resultado final das previsões:
 | previsao_modelo | 859.88  |
 | vai_estourar    | false   |
 
+___
+
+### Front-End
+> [!danger]
+> Devido à arquitetura simples do código, foi optado por não ter sistema de segurança como senhas, section ou JWT.
+
+#### Telas
+
+- Registro <br>
+![img.png](readme.img/img1.png)
+<br><br>
+Campos:
+- Nome
+- Email
+
+<br><br>
+
+- Login <br>
+![img.png](readme.img/img2.png)
+<br><br>
+Campo:
+- Email
+
+- Dashboard <br>
+![img.png](readme.img/img.png)
+<br><br>
+Campo:
+- Criar nova despesa (botão)
+- Limite
+
+- Dashboard Modal <br>
+![img.png](readme.img/img3.png)
+<br><br>
+Campo:
+- Valor
+- Tipo
+- Descrição
