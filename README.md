@@ -357,7 +357,7 @@ Resultado final das previsões:
 ___
 
 ### Front-End
-> [!danger]
+> [!WARNING]
 > Devido à arquitetura simples do código, foi optado por não ter sistema de segurança como senhas, section ou JWT.
 
 #### Telas
