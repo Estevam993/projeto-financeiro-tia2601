@@ -1,14 +1,6 @@
 import {type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent} from "@/components/ui/chart.tsx";
 import {Bar, BarChart, CartesianGrid, Cell, XAxis, YAxis} from "recharts";
-
-const colors = [
-  "#2563eb",
-  "#60a5fa",
-  "#f59e0b",
-  "#10b981",
-  "#ef4444",
-  "#8b5cf6",
-]
+import colors from "@/helpers/colors.ts";
 
 interface TypeChartProps {
   values: Record<string, number>

@@ -6,10 +6,9 @@ from services.DespesaService import DespesaService
 despesa_bp = Blueprint("despesas", __name__)
 
 
-@despesa_bp.route("/", methods=["POST"])
-def criar_despesa():
+@despesa_bp.route("/<int:user_id>", methods=["POST"])
+def criar_despesa(user_id):
     data = request.get_json()
-    user_id = session.get("id")
 
     if user_id:
         with SessionLocal() as db_session:
@@ -41,7 +40,6 @@ def criar_despesa():
 
 @despesa_bp.route("/<int:user_id>", methods=["GET"])
 def listar_despesas(user_id):
-
     if user_id:
         with SessionLocal() as db_session:
             service = DespesaService(db_session)
@@ -57,9 +55,13 @@ def listar_despesas(user_id):
             "Message": "Não autorizado"
         }), 401
 
-@despesa_bp.route("mensal/", methods=["GET"])
+
+@despesa_bp.route('/mensal', methods=['GET', 'OPTIONS'])
 def listar_despesa_mensal():
-    user_id = session.get("id")
+    if request.method == 'OPTIONS':
+        return '', 200
+
+    user_id = request.args.get('id', type=int)
     limite = request.args.get('limite', type=float)
 
     if user_id:

@@ -1,15 +1,8 @@
 import type {ColumnDef} from "@tanstack/react-table";
+import type {ExpenseType} from "@/types/ExpenseType.ts";
 
-type Despesa = {
-  date: string,
-  descricao: string,
-  id: number,
-  tipo: string,
-  user_id: number,
-  valor: number,
-}
 
-const columnsDespesas: ColumnDef<Despesa>[] = [
+const columnsDespesas: ColumnDef<ExpenseType>[] = [
   {
     accessorKey: "descricao",
     header: () => (
@@ -54,4 +47,4 @@ const columnsDespesas: ColumnDef<Despesa>[] = [
   }
 ]
 
-export {columnsDespesas, type Despesa}
+export {columnsDespesas}
